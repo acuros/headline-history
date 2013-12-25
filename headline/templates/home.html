@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<ul>{% for headline in headlines %}
+    <li>
+        <dl>
+            <dt>언론사</dt>
+            <dd>{{ headline.press.name }}</dd>
+            <dt>헤드라인</dt>
+            <dd><a href="{{ headline.link }}">{{ headline.title }}</a></dd>
+            <dt>확인된 시각</dt>
+            <dd>{{ headline.crawled_time|date:"y-m-d G:H:i" }}</dd>
+        </dl>
+    </li>
+{% endfor %}</ul>
+{% endblock %}
