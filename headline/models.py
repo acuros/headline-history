@@ -9,3 +9,8 @@ class Headline(models.Model):
     press = models.ForeignKey(Press)
     title = models.TextField()
     crawled_time = models.DateTimeField(auto_now_add=True)
+
+
+class CrawlLog(models.Model):
+    updated_presses = models.ManyToManyField(Press)
+    crawled_time = models.DateTimeField(auto_now_add=True)
