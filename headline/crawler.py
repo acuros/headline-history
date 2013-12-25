@@ -39,14 +39,14 @@ class Crawler(object):
         title = link_item.text()
         title_link = link_item.attr('href')
         if title:
-            return dict(title=title, title_link=title_link)
+            return dict(title=title, link=title_link)
 
         headline_link_items = pq('a[href="%s"]' % link_item.attr('href')).items()
         texts = [item.text() for item in headline_link_items if item.text()]
         if len(texts) > 1:
-            return dict(title=texts[0], title_link=title_link)
+            return dict(title=texts[0], link=title_link)
 
         candidate = [text for text in texts
                      if len(re.findall(r'\.+', text)) < 2 and len(text) < 80]
         if candidate:
-            return dict(title=candidate[0], title_link=title_link)
+            return dict(title=candidate[0], link=title_link)
