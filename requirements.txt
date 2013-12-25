@@ -1,0 +1,4 @@
+django>=1.5.1
+django-celery
+ujson
+BeautifulSoup
