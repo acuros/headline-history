@@ -16,13 +16,13 @@ class Crawler(object):
         for news in news_map:
             if news['nm'] in ignore_list:
                 continue
-            title, link = self._get_headline(news['page'])
-            if not title:
+            headline = self._get_headline(news['page'])
+            if not headline:
                 now = datetime.datetime.now()
                 with open('log/log.txt', 'a') as f:
                     f.write('[%s] Headline not captured : %s\n' % (now, news['page']))
                 continue
-            headlines[news['nm']] = dict(title=title, link=link)
+            headlines[news['nm']] = headline
         return headlines
 
     def _get_news_map(self):
@@ -39,14 +39,14 @@ class Crawler(object):
         title = link_item.text()
         title_link = link_item.attr('href')
         if title:
-            return title, link_item.attr('href')
+            return dict(title=title, title_link=title_link)
 
         headline_link_items = pq('a[href="%s"]' % link_item.attr('href')).items()
         texts = [item.text() for item in headline_link_items if item.text()]
         if len(texts) > 1:
-            return texts[0], link_item.attr('href')
+            return dict(title=texts[0], title_link=title_link)
 
         candidate = [text for text in texts
                      if len(re.findall(r'\.+', text)) < 2 and len(text) < 80]
         if candidate:
-            return candidate[0], link_item.attr('href')
+            return dict(title=candidate[0], title_link=title_link)
