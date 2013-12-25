@@ -37,3 +37,6 @@ nosetests.xml
 
 .idea
 .sw[po]
+
+local_settings.py
+*.sqlite3
