@@ -1,3 +1,4 @@
+import datetime
 import ujson as json
 import urllib
 
@@ -11,8 +12,9 @@ class Crawler(object):
         for news in news_map:
             headline = self._get_headline(news['page'])
             if not headline:
+                now = datetime.datetime.now()
                 with open('log/log.txt', 'a') as f:
-                    f.write('Headline not captured : %s(%s)' % (news['nm'].encode('utf8'), news['page']))
+                    f.write('[%s] Headline not captured : %s\n' % (now, news['page']))
                 continue
             headlines[news['nm']] = headline
         return headlines
