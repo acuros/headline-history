@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+class Press(models.Model):
+    name = models.CharField(max_length=50)
+
+
+class Headline(models.Model):
+    press = models.ForeignKey(Press)
+    title = models.TextField()
+    crawled_time = models.DateTimeField(auto_now_add=True)
