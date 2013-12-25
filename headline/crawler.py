@@ -6,7 +6,7 @@ import urllib
 
 from pyquery import PyQuery
 
-ignore_list = [u'아이뉴스24', u'월스트리트저널']
+ignore_list = [u'아이뉴스24', u'월스트리트저널', u'스포탈코리아']
 
 
 class Crawler(object):
@@ -16,13 +16,13 @@ class Crawler(object):
         for news in news_map:
             if news['nm'] in ignore_list:
                 continue
-            headline = self._get_headline(news['page'])
-            if not headline:
+            title, link = self._get_headline(news['page'])
+            if not title:
                 now = datetime.datetime.now()
                 with open('log/log.txt', 'a') as f:
                     f.write('[%s] Headline not captured : %s\n' % (now, news['page']))
                 continue
-            headlines[news['nm']] = headline
+            headlines[news['nm']] = dict(title=title, link=link)
         return headlines
 
     def _get_news_map(self):
@@ -37,15 +37,16 @@ class Crawler(object):
         pq = PyQuery(html)
         link_item = pq('a[target="_blank"]:first')
         title = link_item.text()
+        title_link = link_item.attr('href')
         if title:
-            return title
+            return title, link_item.attr('href')
 
         headline_link_items = pq('a[href="%s"]' % link_item.attr('href')).items()
         texts = [item.text() for item in headline_link_items if item.text()]
         if len(texts) > 1:
-            return texts[0]
+            return texts[0], link_item.attr('href')
 
         candidate = [text for text in texts
                      if len(re.findall(r'\.+', text)) < 2 and len(text) < 80]
         if candidate:
-            return candidate[0]
+            return candidate[0], link_item.attr('href')

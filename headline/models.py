@@ -8,6 +8,7 @@ class Press(models.Model):
 class Headline(models.Model):
     press = models.ForeignKey(Press)
     title = models.TextField()
+    link = models.TextField()
     crawled_time = models.DateTimeField(auto_now_add=True)
 
 

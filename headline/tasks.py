@@ -9,11 +9,11 @@ def crawl_headlines():
     crawler = Crawler()
     headlines = crawler.get_headlines()
     updated_presses = []
-    for press_name, title in headlines.iteritems():
+    for press_name, headline in headlines.iteritems():
         press, created = Press.objects.get_or_create(name=press_name)
-        headline = Headline.objects.filter(press=press).order_by('-id').first()
-        if not headline or headline.title != title:
+        last_headline = Headline.objects.filter(press=press).order_by('-id').first()
+        if not last_headline or last_headline.title != headline['title']:
             updated_presses.append(press)
-            Headline.objects.create(press=press, title=title)
+            Headline.objects.create(press=press, title=headline['title'], link=headline['link'])
     log = CrawlLog.objects.create()
     log.updated_presses.add(*updated_presses)
