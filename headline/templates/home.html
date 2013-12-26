@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <section>
-	<ul>{% for headline in headlines %}
-		<li>
-			<article>
-				<h1>{{ headline.press.name}}</h1>
-				<a href="{{ headline.link }}">{{ headline.title }}</a> <small>({{ headline.crawled_time|date:"y-m-d G:H:i" }})</small>
-			</article>
-		</li>
-	{% endfor %}</ul>
+  <ul id="headline-list">{% for headline in headlines %}
+    <li>
+      <article class="headline" data-id="{{ headline.id }}">
+        <h1>{{ headline.press.name }}</h1>
+        <a href="{{ headline.link }}">{{ headline.title }}</a> <small>({{ headline.crawled_time|date:"y-m-d G:H:i" }})</small>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="/more/{{ headlines.last.id }}" id="get-more">더 보기</a>
 </section>
 {% endblock %}
