@@ -17,7 +17,7 @@ def home(request):
 
 
 def more(request, last_headline_id):
-    headlines = Headline.objects.filter(id__gte=last_headline_id).order_by('-id')[:30]
+    headlines = Headline.objects.filter(id__lt=last_headline_id).order_by('-id')[:30]
     headlines = [dict(id=headline.id,
                       pressName=headline.press.name,
                       link=headline.link,
