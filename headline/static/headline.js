@@ -18,9 +18,10 @@ function getMore()
       $li.append($article);
       $('#headline-list').append($li);
     });
-    if(headlines.length != 30)
+    if(headlines.length != 50)
     {
       hasMoreHeadlines = false;
+	  $('#get-more').remove();
     }
   });
 }
