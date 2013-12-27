@@ -9,12 +9,14 @@ function getMore()
   {
     headlines.forEach(function(headline)
     {
-      var $li = $('<li></li>');
+      var $li = $('<li class="list-group-item"></li>');
       var $article = $('<article class="headline"></article>');
       $article.attr('data-id', headline.id);
-      $article.append($('<h1>' + headline.pressName + '</h1>'));
-      $article.append($('<a href="'+headline.link+'">'+headline.title+'</a>'));
-      $article.append($('<small>('+headline.crawledTime+')</small>'));
+	  var $h4 = $('<h4 class="list-group-item-heading"></h4>');
+	  $h4.append('<b>' + headline.pressName + '</b>');
+	  $h4.append('<span class="badge pull-right">'+headline.crawledTime+')</span>');
+      $article.append($h4);
+	  $article.append($('<p class="list-group-item-text"><a href="'+headline.link+'">'+headline.title+'</a></p>'));
       $li.append($article);
       $('#headline-list').append($li);
     });
