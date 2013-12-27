@@ -8,7 +8,7 @@
       <article class="headline" data-id="{{ headline.id }}">
         <h4 class="list-group-item-heading">
           <b>{{ headline.press.name }}</b>
-          <span class="badge pull-right">{{ headline.crawled_time|relative_time }}</span>
+          <span class="crawled-time badge pull-right" data-toggle="tooltip" title="{{ headline.crawled_time|date:"y-m-d G:H" }}">{{ headline.crawled_time|relative_time }}</span>
         </h4>
         <p class="list-group-item-text">
           <a href="{{ headline.link }}">{{ headline.title }}</a>
@@ -26,7 +26,7 @@
     <article class="headline" data-id="{{ this.id }}">
       <h4 class="list-group-item-heading">
         <b>{{ this.press_name }}</b>
-        <span class="badge pull-right">{{ this.crawled_time }}</span>
+        <span class="crawled-time badge pull-right" data-toggle="tooltip" title="{{ this.crawled_time }}">{{ this.relative_crawled_time }}</span>
       </h4>
       <p class="list-group-item-text">
         <a href="{{ this.link }}">{{ this.title }}</a>

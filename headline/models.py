@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from utils import to_relative_time
 
@@ -17,7 +18,9 @@ class Headline(models.Model):
                       press_name=self.press.name,
                       link=self.link,
                       title=self.title,
-                      crawled_time=to_relative_time(self.crawled_time)
+                      crawled_time=datetime.strftime(self.crawled_time,
+                                                     '%y-%m-%d %H:%M'),
+                      relative_crawled_time=to_relative_time(self.crawled_time)
                     )
 
 
