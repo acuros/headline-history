@@ -42,3 +42,4 @@ local_settings.py
 *.sqlite3
 log/*
 celerybeat*
+static/*

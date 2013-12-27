@@ -1,7 +1,5 @@
 import ujson as json
 
-from datetime import datetime
-
 from django.http import HttpResponse
 from django.shortcuts import render
 from headline.models import Headline, Press, CrawlLog
@@ -22,11 +20,5 @@ def home(request):
 def more(request, last_headline_id):
     headlines = Headline.objects.filter(id__lt=last_headline_id)\
                         .order_by('-id')[:HEADLINES_PER_PAGE]
-    headlines = [dict(id=headline.id,
-                      pressName=headline.press.name,
-                      link=headline.link,
-                      title=headline.title,
-                      crawledTime=datetime.strftime(headline.crawled_time,
-                                                    '%y-%m-%d %H:%M'))
-                 for headline in headlines]
+    headlines = [headline.to_dict() for headline in headlines]
     return HttpResponse(json.dumps(headlines), mimetype='application/json')
