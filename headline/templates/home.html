@@ -2,20 +2,37 @@
 {% block content %}
 <section>
   <ul id="headline-list" class="list-group">
-  	{% for headline in headlines %}
-  	<li class="list-group-item">
-  		<article class="headline" data-id="{{ headline.id }}">
-	  		<h4 class="list-group-item-heading">
-	  			<b>{{ headline.press.name }}</b>
-	  			<span class="badge pull-right">{{ headline.crawled_time|date:"y-m-d G:H:i" }}</span>
-	  		</h4>
-	  		<p class="list-group-item-text">
-		  		<a href="{{ headline.link }}">{{ headline.title }}</a>
-	  		</p>
-  		</article>
-  	</li>
-  	{% endfor %}
+    {% for headline in headlines %}
+    <li class="list-group-item">
+      <article class="headline" data-id="{{ headline.id }}">
+        <h4 class="list-group-item-heading">
+          <b>{{ headline.press.name }}</b>
+          <span class="badge pull-right">{{ headline.crawled_time|date:"y-m-d G:H" }}</span>
+        </h4>
+        <p class="list-group-item-text">
+          <a href="{{ headline.link }}">{{ headline.title }}</a>
+        </p>
+      </article>
+    </li>
+    {% endfor %}
   </ul>
   <a href="/more/{{ headlines.last.id }}" id="get-more" class="btn btn-default form-control">더 보기</a>
 </section>
+<script id="headline-template" type="text/x-handlebars-template">
+  {% verbatim %}
+  {{#each headlines}}
+  <li class="list-group-item">
+    <article class="headline" data-id="{{ this.id }}">
+      <h4 class="list-group-item-heading">
+        <b>{{ this.pressName }}</b>
+        <span class="badge pull-right">{{ this.crawledTime }}</span>
+      </h4>
+      <p class="list-group-item-text">
+        <a href="{{ this.link }}">{{ this.title }}</a>
+      </p>
+    </article>
+  </li>
+  {{/each}}
+  {% endverbatim %}
+</script>
 {% endblock %}
