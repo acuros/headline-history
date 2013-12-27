@@ -4,7 +4,7 @@ from headline.crawler import Crawler
 from headline.models import Headline, Press, CrawlLog
 
 
-@periodic_task(run_every=crontab(minute="*/15"))
+@periodic_task(run_every=crontab(minute="*/5"))
 def crawl_headlines():
     crawler = Crawler()
     headlines = crawler.get_headlines()
