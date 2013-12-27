@@ -6,7 +6,7 @@ import urllib
 
 from pyquery import PyQuery
 
-ignore_list = [u'아이뉴스24', u'월스트리트저널', u'스포탈코리아']
+ignore_list = [u'아이뉴스24', u'월스트리트저널', u'스포탈코리아', u'지지통신']
 
 
 class Crawler(object):
