@@ -4,7 +4,12 @@ function getMore()
 {
   if(!hasMoreHeadlines)
     return;
-  $.get('/more/' + $('.headline:last').attr('data-id'), function(headlines)
+  var query = $('#query').val();
+  if(query)
+  {
+    query = '?q=' + query;
+  }
+  $.get('/more/' + $('.headline:last').attr('data-id') + query, function(headlines)
   {
     var data = { 'headlines': headlines };
     var template = Handlebars.compile($("#headline-template").html());
