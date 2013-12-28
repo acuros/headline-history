@@ -7,11 +7,11 @@
     <li class="list-group-item">
       <article class="headline" data-id="{{ headline.id }}">
         <h4 class="list-group-item-heading">
-          <b>{{ headline.press.name }}</b>
+          <b>{{ headline.press.name|emphasize:query }}</b>
           <span class="crawled-time badge pull-right" data-toggle="tooltip" title="{{ headline.crawled_time|date:"y-m-d G:H" }}">{{ headline.crawled_time|relative_time }}</span>
         </h4>
         <p class="list-group-item-text">
-          <a href="{{ headline.link }}">{{ headline.title }}</a>
+          <a href="{{ headline.link }}">{{ headline.title|emphasize:query }}</a>
         </p>
       </article>
     </li>

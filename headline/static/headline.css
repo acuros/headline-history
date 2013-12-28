@@ -5,3 +5,7 @@ body {
 #footer {
 	margin: 20px auto;
 }
+
+.red {
+    color: red;
+}
