@@ -20,7 +20,8 @@ class Crawler(object):
             if not headline:
                 now = datetime.datetime.now()
                 with open('log/log.txt', 'a') as f:
-                    f.write('[%s] Headline not captured : %s\n' % (now, news['page']))
+                    f.write('[%s] Headline not captured : %s\n'
+                            % (now, news['page']))
                 continue
             headlines[news['nm']] = headline
         return headlines
@@ -41,8 +42,8 @@ class Crawler(object):
         if title:
             return dict(title=title, link=title_link)
 
-        headline_link_items = pq('a[href="%s"]' % link_item.attr('href')).items()
-        texts = [item.text() for item in headline_link_items if item.text()]
+        headline_links = pq('a[href="%s"]' % link_item.attr('href'))
+        texts = [item.text() for item in headline_links.items() if item.text()]
         if len(texts) > 1:
             return dict(title=texts[0], link=title_link)
 

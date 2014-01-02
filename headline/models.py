@@ -30,14 +30,14 @@ class Headline(models.Model):
     crawled_time = models.DateTimeField(auto_now_add=True)
 
     def to_dict(self):
-        return dict(id=self.id,
-                      press_name=self.press.name,
-                      link=self.link,
-                      title=self.title,
-                      crawled_time=datetime.strftime(self.crawled_time,
-                                                     '%y-%m-%d %H:%M'),
-                      relative_crawled_time=to_relative_time(self.crawled_time)
-                    )
+        return dict(
+            id=self.id,
+            press_name=self.press.name,
+            link=self.link,
+            title=self.title,
+            crawled_time=self.crawled_time.strftime('%y-%m-%d %H:%M'),
+            relative_crawled_time=to_relative_time(self.crawled_time)
+        )
 
 
 class CrawlLog(models.Model):
