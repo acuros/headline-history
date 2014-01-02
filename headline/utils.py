@@ -3,6 +3,7 @@ import datetime
 
 from django.utils import timezone
 
+
 def to_relative_time(event_time):
     event_time = event_time.astimezone(timezone.get_current_timezone())
     event_time = event_time.replace(tzinfo=None)
